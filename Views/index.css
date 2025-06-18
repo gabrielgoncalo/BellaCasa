@@ -1,0 +1,271 @@
+body {
+    background-color: #fff8e1;
+    text-align: center;
+    margin-top: 100px;
+}
+
+/* Cabeçalho */
+header {
+    width: 100%;
+    height: 8%;
+    background-color: #e74c3c;
+    position: fixed;
+    top: 0;                 /* Afastamento de 0 do topo */
+    left: 0;                /* Afastamento de 0 da esquerda */
+    z-index: 1000;
+    text-align: center;
+    text-align: left;
+    padding-left: 5%;
+    display: flex;
+    align-items: center;
+    gap: 50px
+}
+
+/* Links */
+header a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-weight: bold;
+    height: 100%;
+    display: flex;
+    font-family: 'Segoe UI', sans-serif;
+    transition: color 0.3s;
+    align-items: center;
+
+}
+
+header a:hover {
+
+    color: #d4d4d4; /* Muda a cor do nome ao passar o mouse */
+    transition: color 0.5s;
+    transform: scale(1.05); /* Dá um leve zoom */
+}
+
+
+header h1 {
+    color: #f5f5f5;
+    font-family: 'Playfair Display', serif;
+    cursor: default;
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -30px; /* valor negativo para invadir a próxima seção */
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to bottom, #e74c3c, transparent);
+    z-index: -1;
+  
+}
+
+
+#appointment-form {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+#appointment-form input,
+#appointment-form textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+/*##exibir lista##*/
+#appointment-list {
+    list-style: none;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    
+}
+
+/*Cada item da lista*/
+#appointment-list li {
+    background-color: #fff0f0;
+    border: 1px solid #ffcccc;
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+#appointment-list li:hover {
+    transform: translateY(-4px);
+  }
+
+/*Botao de excluir*/
+#appointment-list li button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3;
+}
+
+#appointment-list li button:hover {
+    background-color: #cc0000;
+  }
+
+
+.conteiner {
+    max-width: 1100;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+body h2 {
+    font-family: 'Montserrat', sans-serif;
+    left: 30px;
+    justify-content: left;
+    color: #888888 ;
+}
+
+.barra-pesquisa {
+    /*width: 300px;
+    padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    justify-content: center;*/
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Alinha no eixo horizontal */
+    align-items: center;     /* Alinha no eixo vertical */
+}
+
+.barra-pesquisa input[type="text"] {
+    border: 2px solid #eae8e8; /* borda cinza */
+    border-radius: 45px;      /* cantos arredondados */
+    padding: 8px;            /* espaço interno */
+    outline: none;           /* remove a borda azul quando clica */
+}
+
+.barra-pesquisa button {
+    border: 1.5px solid #bfbaba;
+    border-radius: 30px;
+    padding: 7px 10px;
+    cursor: pointer;
+}
+
+.barra-pesquisa button:hover {
+    background-color: #c2bdbd;
+}
+
+
+.titulo-decorado {
+    text-align: center;
+    margin: 40px 0;
+    position: relative;
+}
+
+.titulo-decorado span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #888888;
+    font-weight: 300;
+    position: relative;
+    padding: 0 20px;
+}
+
+.titulo-decorado::before,
+.titulo-decorado::after {
+    content: "";
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background-color: #888888;
+    vertical-align: middle;
+}
+
+.titulo-decorado::before {
+  margin-right: 1px;
+}
+
+.titulo-decorado::after {
+  margin-left: 1px;
+}
+
+.wolf img {
+    border-radius: 5px;
+}
+
+.wolf img:hover {
+    transform: scale(1.4);
+    transition: 0.3s;
+}
+
+.wolf p {
+    color: #888888;
+
+}
+
+
+
+.lyor p {
+    color: #888888;
+
+}
+
+.lyor img {
+    border-radius: 5px;
+}
+
+.lyor img:hover {
+    transform: scale(1.4);
+    transition: 0.3s;
+}
+
+::selection {
+    background-color: #e74c3c;  /* vermelho do header */
+    color: #fff8e1;             /* tom creme claro */
+}
+
+.sessao-wolf {
+    background-color: #fff8e1; /* tom creme claro */
+    padding: 20px 20px;
+    color: #333;
+}
+
+
+.sessao-lyor {
+    background-color: #e8cba6; /* bege suave */
+    padding: 60px 20px;
+    color: #333;
+}
+
+.plantas {
+    color: #888888;
+}
+
+.sessao-plantas {
+    background-color: rgb(227, 242, 204);
+    padding: 60px 20px;
+    color: #333;
+}
