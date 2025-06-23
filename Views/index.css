@@ -70,6 +70,8 @@ header::after {
     display: flex;
     gap: 10px;
     flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 #appointment-form input,
@@ -79,6 +81,20 @@ header::after {
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: none;
+}
+
+#appointment-form button {
+    padding: 5px;
+    width: 30%;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0 auto; 
+    border: 1.5px solid #000000;
+
+}
+
+#appointment-form button:hover {
+    background-color: #c4c4c4;
 }
 
 /*##exibir lista##*/

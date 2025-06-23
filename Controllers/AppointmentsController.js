@@ -24,6 +24,35 @@ exports.getAppointments = async (req, res) => {
     }
 };
 
+
+// Obter os compromissos por (nome)
+exports.getAppointmentByName = async (req, res) => {
+    try {
+        const nameQuery = req.query.name;
+        if(!nameQuery) {
+            return res.status(400).json({ message: "Nome nao fornecido"});
+        }
+
+        // Buscar compromissos que contenham ao nome (case-insensitive)
+        const appointments = await Appointment.find({
+            name: { $regex: new RegExp(nameQuery, "i") }
+        });
+
+        if (appointments.length === 0) {
+            return res.status(404).json({ message: "Nenhum compromisso encontrado" });
+        }
+
+        res.json(appointments);
+
+    } catch (err) {
+        res.status(500).json({ message: "Erro ao buscar compromisso por nome" })
+    }
+};
+
+
+
+
+
 // Obter compromisso por ID
 exports.getAppointmentsById = async (req, res) => {
     try{

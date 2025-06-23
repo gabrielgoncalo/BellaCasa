@@ -2,6 +2,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("appointment-form");
     const list = document.getElementById("appointment-list");
+    const btnBuscarNome = document.getElementById("btn-buscar-nome");
+    const inputNome = document.getElementById("search-name")
+    const resultadoNomeDiv = document.getElementById("resultado-busca-nome");
 
     // 🔹 Função para buscar e exibir compromissos
     
@@ -31,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         li.appendChild(deleteButton);
                         list.appendChild(li);
+                        
                     });
 
                 } catch (error) {
@@ -53,15 +57,21 @@ document.addEventListener("DOMContentLoaded", () => {
             const newAppointment = { name, category, price, stock, description };
 
             try {
-                await fetch("http://localhost:3000/appointments", {
+
+                const response = await fetch("http://localhost:3000/appointments", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(newAppointment)
                 });
-
-                form.reset(); // Limpa o formulário
-                fetchAppointments(); // Atualiza a lista após criar um novo compromisso
-
+                
+                if (response.ok){
+                    form.reset(); // Limpa o formulário
+                    fetchAppointments(); // Atualiza a lista após criar um novo compromisso
+                    alert("Produto cadastrado com sucesso");
+                } else {
+                    const errorData = await response.json();
+                    alert("Erro ao cadastar o produto: " + (errorData.message || "Erro desconhecido"));
+                }
             } catch (error) {
                 console.error("Erro ao criar compromisso:", error);
             }
@@ -116,5 +126,43 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erro ao atualizar compromisso", error)
         }
     }
+
+    btnBuscarNome.addEventListener("click", async () => {
+        const nome = inputNome.value.trim();
+        
+        if (!nome){
+            alert("Digite um nome valido");
+            return;
+        }
+
+        try {
+            const response = await fetch (`http://localhost:3000/appointments/search?name=${encodeURIComponent(nome)}`);
+
+            if (!response.ok) {
+                resultadoNomeDiv.innerHTML = `<p style = "color: red;">Nenhum produto encontrado.</p>`;
+                return;
+            }
+
+            const appointments = await response.json();
+
+            resultadoNomeDiv.innerHTML = "";
+
+            appointments.forEach(appointment => {
+                resultadoNomeDiv.innerHTML += `
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                    <p><strong>Nome:</strong> ${appointment.name}</p>
+                    <p><strong>Categoria:</strong> ${appointment.category}</p>
+                    <p><strong>Preço:</strong> ${appointment.price} R$</p>
+                    <p><strong>Estoque:</strong> ${appointment.stock}</p>
+                    <p><strong>Descrição:</strong> ${appointment.description}</p>
+                </div>
+                `;
+            });
+
+        } catch (error) {
+            console.error("Erro ao buscar produto", error);
+            resultadoNomeDiv.innerHTML = `<p style="color:red;">Erro ao buscar compromisso.</p>`;
+        }
+    });
     
 });
